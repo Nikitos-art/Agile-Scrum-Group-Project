@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+
+  web-app:
+    container_name: ${PYTHON_CONTAINER_NAME}
+    build:
+      context: ./
+      dockerfile: ./docker/development/web-app.dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/web-app/scrumlab
+    env_file:
+      - .env
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - postgres_container
+
+  postgres_container:
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    image: postgres:14.0-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  adminer_container:
+    container_name: ${ADMINER_CONTAINER_NAME}
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres_container
+      ADMINER_DESIGN: nette
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres-volume:
+#  static_volume:
