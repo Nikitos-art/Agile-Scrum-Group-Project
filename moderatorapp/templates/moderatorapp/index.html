@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebars.css' %}">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'mainapp/includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                {% include 'moderatorapp/includes/inc_moderator_left_menu.html' %}
+            </div>
+            <div class="col-8">
+                <div class="list-group list-group-flush border-bottom">
+
+                    <h3>Выберите категорию для модерации</h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'mainapp/includes/inc_footer.html' %}
+{% endblock %}

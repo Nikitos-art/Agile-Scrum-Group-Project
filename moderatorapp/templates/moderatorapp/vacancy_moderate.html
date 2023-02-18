@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebars.css' %}">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'mainapp/includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                {% include 'moderatorapp/includes/inc_moderator_left_menu.html' %}
+            </div>
+            <div class="col-8">
+                <div class="list-group list-group-flush border-bottom">
+
+                    {% for item in vacancy_for_moderation %}
+                        <a href="{% url 'moderatorapp:moderator_lk_vacancy_moderate' pk=item.pk %}" class="list-group-item list-group-item-action py-3 lh-sm" aria-current="true">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">
+                                    Вакансия <b>{{ item.vacancy_name }}</b> от компании {{ item.company.company_name }}
+                                </strong>
+                                <small>{{ item.updated_at }}</small>
+                            </div>
+                            <div class="col-10 mb-1 small">
+                                {{ item.salary_min }} - {{ item.salary_max }} ({{ item.currency }})
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'mainapp/includes/inc_footer.html' %}
+{% endblock %}
