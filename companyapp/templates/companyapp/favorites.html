@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include 'mainapp/includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+    <div class="b-example-divider"></div>
+    <div class="container px-4 py-5" id="icon-grid">
+        <h2> Избранные резюме </h2>
+
+        {% for item in favorite_items %}
+            <div class="card" style="margin-bottom: 10px">
+                <div class="card-body">
+                    <h3 class="card-title" style="padding: 0"><a href="{% url 'candidate:resume_detail' pk=item.resume.pk %}">
+                        {{ item.resume.candidate }} </a></h3>
+                    <h4 class="card-subtitle mb-2 text-muted">{{ item.resume.city }}</h4>
+                    <p class="card-text">{{ item.resume.desired_position }}</p>
+                    <p class="card-text">{{ item.resume.level }}</p>
+                    <p class="card-text">{{ item.resume.candidate }}</p>
+                    <button class="btn btn-round">
+                        <a class="btn btn-primary" href="#" role="button">Откликнуться</a>
+                        <a class="btn btn-primary" href="{% url 'favorite:company_remove' item.pk %}" role="button">
+                        Удалить из избранного</a>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'mainapp/includes/inc_footer.html' %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% for resume_obj in resume %}
+<!--{% if user.id == resume_obj.candidate.user.id %}-->
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Обо мне</h5>
+        <div class="row">
+            <p class="card-text">{{ resume_obj.about_me }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Ключевые навыки</h5>
+        <div class="row">
+            <p class="card-text">{{ resume_obj.skills }}</p>
+        </div>
+    </div>
+</div>
+<!--{% endif %}-->
+{% endfor %}

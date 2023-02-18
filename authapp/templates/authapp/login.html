@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include 'mainapp/includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog"
+             id="modalSignin">
+            <div class="modal-dialog" role="document">
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            <p>- {{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                        <h1 class="fw-bold mb-0 fs-2">Авторизация</h1>
+                    </div>
+
+                    <div class="modal-body p-5 pt-0">
+                        <form class="">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.username.name }}"
+                                       placeholder="{{ form.username.label }}">
+                                <label for="floatingInput">{{ form.username.label }}</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                       name="{{ form.password.name }}"
+                                       placeholder="{{ form.password.label }}">
+                                <label for="floatingPassword">{{ form.password.label }}</label>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Войти
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% if debug_mode %}
+        <div class="container col-xxl-8 px-4 py-5">
+            <p>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                    Смотреть фейковые данные
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {% for item in new_list_of_fake_users %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="{{ form.username.name }}" value="{{ item.login }}">
+                            <input type="hidden" name="{{ form.password.name }}" value="{{ item.password }}">
+                            <button class="btn btn-link" type="submit">{{ item.title }}</button>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'mainapp/includes/inc_footer.html' %}
+{% endblock %}

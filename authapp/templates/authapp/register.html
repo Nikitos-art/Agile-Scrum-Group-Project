@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include 'mainapp/includes/inc_header.html' %}
+{% endblock %}
+
+{% block site_content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog"
+             id="modalSignin">
+            <div class="modal-dialog" role="document">
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            <p>- {{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                        <h1 class="fw-bold mb-0 fs-2">Регистрация</h1>
+                    </div>
+
+                    <div class="modal-body p-5 pt-0">
+                        <form class="">
+                            <div class="form-floating mb-3">
+                                <b>Ваша роль: </b>
+                                {{ form.user_role }}
+                                <div style="color: red;">
+                                    {{ form.user_role.errors }}
+                                </div>
+                            </div>
+                            <hr>
+
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.username.name }}"
+                                       placeholder="{{ form.username.label }}">
+                                <label for="floatingInput">{{ form.username.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.username.errors }}
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.first_name.name }}"
+                                       placeholder="{{ form.first_name.label }}">
+                                <label for="floatingInput">{{ form.first_name.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.first_name.errors }}
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.last_name.name }}"
+                                       placeholder="{{ form.last_name.label }}">
+                                <label for="floatingInput">{{ form.last_name.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.last_name.errors }}
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.patronymic.name }}"
+                                       placeholder="{{ form.patronymic.label }}">
+                                <label for="floatingInput">{{ form.patronymic.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.patronymic.errors }}
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <b>Ваш пол: </b>
+                                {{ form.gender }}
+                                <div style="color: red;">
+                                    {{ form.gender.errors }}
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.email.name }}"
+                                       placeholder="{{ form.email.label }}">
+                                <label for="floatingInput">{{ form.email.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.email.errors }}
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.birthday.name }}"
+                                       placeholder="{{ form.birthday.label }}">
+                                <label for="floatingInput">{{ form.birthday.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.birthday.errors }}
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3" id="floatingInput"
+                                       name="{{ form.city.name }}"
+                                       placeholder="{{ form.city.label }}">
+                                <label for="floatingInput">{{ form.city.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.city.errors }}
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                       name="{{ form.password1.name }}"
+                                       placeholder="{{ form.password1.label }}">
+                                <label for="floatingPassword">{{ form.password1.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.password1.errors }}
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                       name="{{ form.password2.name }}"
+                                       placeholder="{{ form.password2.label }}">
+                                <label for="floatingPassword">{{ form.password2.label }}</label>
+                                <div style="color: red;">
+                                    {{ form.password2.errors }}
+                                </div>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">
+                                Регистрация
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {% include 'mainapp/includes/inc_footer.html' %}
+{% endblock %}
+
+
+
